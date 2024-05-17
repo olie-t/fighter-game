@@ -19,3 +19,7 @@ class Settings:
         #Enemy settings
         self.enemy_speed = 2.0
 
+        #power up settings
+        self.powerup_drop_chance = 1
+        self.powerup_speed = 1
+
