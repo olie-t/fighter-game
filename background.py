@@ -1,4 +1,5 @@
 import random
+import os
 
 import pygame
 from pygame.sprite import Sprite
@@ -10,8 +11,12 @@ class Tree(Sprite):
         super().__init__()
         self.screen = fg_game.screen
         self.settings = fg_game.settings
-        self.color = (139, 69, 19)  # Brown color
-        self.rect = pygame.Rect(0, 0, 7, 7)  # Small pixel size
+        self.images_folder = 'images/trees/'
+        self.images = [os.path.join(self.images_folder, f) for f in os.listdir(self.images_folder)]
+
+        self.image_path = random.choice(self.images)
+        self.image = pygame.image.load(self.image_path).convert_alpha()
+        self.rect = self.image.get_rect()
         if initial:
             self.rect.x = random.randint(0, self.settings.screen_width)
         else:
@@ -27,4 +32,4 @@ class Tree(Sprite):
 
     def draw_tree(self):
         """Draw the tree to the screen."""
-        pygame.draw.rect(self.screen, self.color, self.rect)
+        self.screen.blit(self.image, self.rect)
